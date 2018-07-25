@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CurrentWeatherService } from './services/current-weather.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private weather : CurrentWeatherService){}
+
+  // se ejecuta cuando el componente esta listo
+  ngOnInit(){
+    this.weather.get();
+  }
 }
