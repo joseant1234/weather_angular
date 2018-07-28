@@ -9,10 +9,14 @@ import { CurrentWeatherService } from './services/current-weather.service';
 export class AppComponent {
   title = 'app';
 
-  constructor(private weather : CurrentWeatherService){}
+  constructor(private weatherService : CurrentWeatherService){}
 
   // se ejecuta cuando el componente esta listo
   ngOnInit(){
-    this.weather.get();
+    // this.weatherService.get();
+
+    // el servicio tiene un propiedad weather$ que es un observable q recibe los mismos datos q se reciben la peticion http del servicio (del observable q return http.get)
+    // lo q se logra es q ahora existe un propiedad en el componente al cual se puede suscribir, que este en una propidad va servir para trabajar con el template
+    this.weatherService.weather$.subscribe(console.log)
   }
 }
