@@ -1,6 +1,8 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Weather } from '../../structures/weather.structure';
 
 // cuando este en prod, angular de forma automatica utilizará en environment.prod
 import { environment } from '../../environments/environment';
@@ -15,13 +17,32 @@ export class CurrentWeatherService {
   public weatherSubject : Subject<any> = new Subject<any>();
   // por lo general se pone signo dolar $ a los observables para distinguir q es un stream de datos al q se puede suscribir
   // observable weather va ser el sujeto weatherSubject, pero actuando como un observable
-  public weather$ : Observable<any> = this.weatherSubject.asObservable();
+  // public weather$ : Observable<any> = this.weatherSubject.asObservable();
+
+  public weather$ : Observable<any>;
 
   endpoint : string = 'http://api.openweathermap.org/data/2.5/weather';
 
   // inyectar el servicio HttpClient usando el inyector de dependencia
   // si se especifica un argumento para el servicio que se esta realizando que coincida con alguno que tiene registrado el inyector de dependencia, como es el caso de HttpClient lo va asignar ese objeto
   constructor(private http : HttpClient) {
+    // el uso del operador pipe es para pasar como argumento las operaciones
+    // lo q hace es q cuando halla nuevos datos en el observable, se van a pasar por la funcion map, map lo va recibir como argumento de la funcion q se le pasa
+    // lo q return map van a sustituir los datos q map recibió
+    this.weather$ = this.weatherSubject.asObservable().pipe(
+      map((data : any)=>{
+        // como las propiedades q estan dentro de mainWeather son las mismmas q se van a poner en el objeto weather del tipo Weather(weather.structure) se puede usar destructur objects, va agarrar la prop colocadass y las va combinar con las del objeto mainWeather
+        let mainWeather = data.weather[0];
+        let weather : Weather = {
+          name: data.name,
+          cod: data.cod,
+           temp: data.main.temp,
+          ...mainWeather
+        };
+        return weather;
+      })
+    );
+
     // se llama get, pues se esta trabajando con el flujo Subject, q se va llamar en el componente
     // this.weatherService
     this.get({
