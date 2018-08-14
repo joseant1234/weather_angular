@@ -1,0 +1,4 @@
+<!-- el pipe async conoce q lo q viene es un observable o una promesa, espera realice o cumpla la promesa o q el observable envie nuevos datos y luego recibirlos e imprimirlos  -->
+<!-- funciona con los objetos o estructura q envia informacion asincrono -->
+<!-- se suscribe al observable y cuando se recbe informacion se imprime y adicional se le da formato json-->
+{{weatherService.weather$ | async | json}}
