@@ -4,7 +4,7 @@ import { CurrentWeatherService } from '../services/current-weather.service';
 @Component({
   selector: 'app-current-weather',
   templateUrl: './current-weather.component.html',
-  styleUrls: ['./current-weather.component.sass']
+  styleUrls: ['./current-weather.component.css']
 })
 export class CurrentWeatherComponent implements OnInit {
 
