@@ -1,4 +1,9 @@
-/* algunas prop de css-grid son incompatible con sass, por ejemplo para grid-template-area no se puede definir el lugar donde las filas y columnas */
+$dark : #252a34;
+$accent : #ff2e63;
+$light : #eaeaea;
+$main :  #08d9d6;
+
+/* algunas prop de css-grid son incompatible con .sass, por ejemplo para grid-template-area no se puede definir el lugar donde las filas y columnas */
 .card{
   font-weight: slim;
   background: white;
@@ -25,6 +30,14 @@
 
 .card .temp{
   grid-area: temperature;
+  p{
+    margin: 0;
+  }
+  .big{
+    font-size: 2em;
+    color: $main;
+    font-weight: bold;
+  }
 }
 
 .card .icon {
@@ -33,4 +46,10 @@
 
 .card .description {
   grid-area: description;
+  h2{
+    font-size: 1.3em;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: $accent;
+  }
 }

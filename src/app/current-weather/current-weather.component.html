@@ -4,7 +4,9 @@
 <!-- {{weatherService.weather$ | async | json}} -->
 
 <div class="card" *ngIf="weatherService.weather$ | async as weather">
-  <div class="icon"></div>
+  <div class="icon">
+    <app-weather-icon [code]="weather.cod"></app-weather-icon>
+  </div>
   <div class="temp">
     <p>Temperatura</p>
     <p class="big">{{weather.temp}}°</p>
