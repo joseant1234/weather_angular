@@ -17,3 +17,20 @@ interface MinMaxInterface{
   min ?:number;
   max ?:number;
 }
+
+/*
+  '6-12' : {
+    minMaxTemp: {
+      min: 20.24,
+      max: 22.86
+    }
+  }
+
+key = '6-12'
+tempPerDay = {
+  minMaxTemp : {
+    min: 20.24,
+    max: 22.86
+  }
+}
+*/
