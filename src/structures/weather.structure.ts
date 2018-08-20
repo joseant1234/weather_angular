@@ -15,5 +15,5 @@ interface MinMaxInterface{
   day ?:number;
   month ?:number;
   min ?:number;
-  max ?:number;s
+  max ?:number;
 }
