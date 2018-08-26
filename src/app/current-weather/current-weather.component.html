@@ -2,8 +2,9 @@
 <!-- funciona con los objetos o estructura q envia informacion asincrono -->
 <!-- se suscribe al observable y cuando se recbe informacion se imprime y adicional se le da formato json-->
 <!-- {{weatherService.weather$ | async | json}} -->
+<!-- Se esta usando el componente weatherCard, por eso en comentario -->
 
-<div class="card" *ngIf="weatherService.weather$ | async as weather">
+<!-- <div class="card" *ngIf="weatherService.weather$ | async as weather">
   <div class="icon">
     <app-weather-icon [code]="weather.cod"></app-weather-icon>
   </div>
@@ -15,4 +16,6 @@
     <h2>{{weather.name}}</h2>
     <p>{{weather.description}}</p>
   </div>
-</div>
+</div> -->
+
+<app-weather-card [weather]="weatherService.weather$ | async"></app-weather-card>

@@ -43,12 +43,24 @@ export class ForecastService {
         minMaxTemp : {}
       };
 
+      // si utiliza esta condicional como ejemplo random para mostrar los datos de la ciudad y el icono, de esta manera no hacer una operacion de calculo del día
+      if(!tempPerDay.cod || hours == 16){
+        // lo que está en el arreglo weather, en la posicion 0 es el q contiene la informacion del icono a mostrar
+        let source = weatherObject.weather[0];
+        // combinar el objeto source con el objeto q ya está en tmpPerDay (objeto q contiene el min y max de temperatura)
+        // se destruye el obejto temPerDay y se obtiene sus props, luego se detruye el otro objeto y se obtiene sus props, luego se combinan todas esa props en un solo objeto
+        tempPerDay = {...tempPerDay, ...source}
+        // la asignacion del source.id se hace por fuera de la combinacion de elementos, pues la prop cod no tiene esa key en el objeto weather, sino se llama id en e objeto weather
+        tempPerDay.cod = source.id;
+        tempPerDay.name = data.city.name;
+      }
+
       // el temp_min y temp_max de la prop main son valores que definen el rango de error para la temperatura
       // al iniciarse el objeto tempPerDay, esta vacio por tanto si no tiene valores se le asigna la temp_min, o si tiene valor y la temp_min es menor a la temp_min hasta el momento, se le asigna temp_min
       if(!tempPerDay.minMaxTemp.min || (weatherObject.main.temp_min < tempPerDay.minMaxTemp.min)){
         tempPerDay.minMaxTemp.min = weatherObject.main.temp_min;
       }
-      
+
       if(!tempPerDay.minMaxTemp.max || (weatherObject.main.temp_max > tempPerDay.minMaxTemp.max)){
         tempPerDay.minMaxTemp.max = weatherObject.main.temp_max;
       }
@@ -56,7 +68,8 @@ export class ForecastService {
       minMaxPerDay[key] = tempPerDay;
     });
 
-    return minMaxPerDay;
+    // con Object.values se transforma el objeto minMaxPerDay a un arreglo para q sea mas facil manejarlo en el componente
+    return Object.values(minMaxPerDay);
   }
 
   get(coords : Coords){
