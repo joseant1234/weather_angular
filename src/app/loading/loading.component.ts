@@ -35,5 +35,6 @@ export class LoadingComponent implements OnInit {
 
   clear(){
     this.elements = [];
+    this.scheduleNextIteration();
   }
 }

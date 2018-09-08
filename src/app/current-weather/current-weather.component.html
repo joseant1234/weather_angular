@@ -18,4 +18,4 @@
   </div>
 </div> -->
 
-<app-weather-card [weather]="weatherService.weather$ | async"></app-weather-card>
+<app-weather-card [@showUpElement] [weather]="weatherService.weather$ | async"></app-weather-card>
