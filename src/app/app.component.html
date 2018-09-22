@@ -2,4 +2,5 @@
   <app-current-weather></app-current-weather>
   <app-loading></app-loading>
   <app-forecast></app-forecast>
+  {{geolocationService.coords$ | async | json}}
 </div>
