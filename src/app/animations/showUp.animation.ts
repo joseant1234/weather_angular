@@ -1,4 +1,4 @@
-import { trigger, state, transition, style, animate } from '@angular/animations';
+import { trigger, state, transition, style, animate, query, stagger } from '@angular/animations';
 
 // la transicion es como va suceder el cambio entre los estados q se presentan
 // la transicion enter es cuando el componente pasa del estado void (no forma parte de la vista ) a estado in
@@ -12,3 +12,17 @@ export const showUp = trigger('showUpElement',[
     animate(250)
   ])
 ]);
+
+// :enter es un simbolo
+// con query(':enter') elementos recien insertados
+// animate(tiempo de animacion, valores cuando termine la animacion)
+export const showUpStaggered = trigger('showUpCollection',[
+  transition('* => *',[
+    query(':enter',[
+      style({opacity: 0, transform: 'scaleY(0)'}),
+      stagger(70,[
+        animate(300, style({ opacity: 1, transform: 'scaleY(1)' }))
+      ])
+    ],{optional: true})
+  ])
+])

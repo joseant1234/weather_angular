@@ -1,3 +1,6 @@
-<div>
+<!-- al intentar de animar una colección, esta se debe hacer sobre el componente contenedor -->
+<!-- cuando se recien se ejecuta la aplicacion, forecastService.weather$ devuelve un valor diferente a un arreglo, devuelve un undefined, pues debe esperar q se reciban los datos -->
+<!-- ts ofrece un operador ? para q lo q este luego del punto se ejecute antes sobre q lo esta en el signo ? solo si este tiene un valor diferente a undefined o null -->
+<div [@showUpCollection]="(forecastService.weather$ | async)?.length">
   <app-weather-card [weather]="weather" *ngFor="let weather of forecastService.weather$ | async"></app-weather-card>
 </div>
