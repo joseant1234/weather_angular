@@ -9,6 +9,7 @@ import { WeatherIconComponent } from './weather-icon/weather-icon.component';
 import { WeatherCardComponent } from './weather-card/weather-card.component';
 import { ForecastComponent } from './forecast/forecast.component';
 import { LoadingComponent } from './loading/loading.component';
+import { GeolocationButtonComponent } from './geolocation-button/geolocation-button.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LoadingComponent } from './loading/loading.component';
     WeatherIconComponent,
     WeatherCardComponent,
     ForecastComponent,
-    LoadingComponent
+    LoadingComponent,
+    GeolocationButtonComponent
   ],
   imports: [
     BrowserModule,

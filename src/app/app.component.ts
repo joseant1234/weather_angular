@@ -17,7 +17,5 @@ export class AppComponent {
   //   this.forecastService.weather$.subscribe(console.log)
   // }
 
-  ngOnInit(){
-    this.geolocationService.requestGeolocation();
-  }
+  ngOnInit(){}
 }

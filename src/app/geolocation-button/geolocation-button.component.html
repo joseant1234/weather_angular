@@ -1,0 +1,6 @@
+<!-- si hay valor verdadero q devuelve al suscribirse a coords$, mostrar el boton -->
+<!-- solo mostrar si el valor de la promesa $coords es verdadero, al comienzo el valor no es verdadero hasta apretar el boton -->
+<div *ngIf="!(geolocationService.coords$ | async)">
+  <button (click)="geolocationService.requestGeolocation()">Activar mi ubicación</button>
+  <p>Active tu ubicación para recibir los datos del clima para tu ciudad</p>
+</div>
