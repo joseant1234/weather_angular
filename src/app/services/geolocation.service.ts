@@ -8,8 +8,12 @@ export class GeolocationService {
 
   // al utilizar observables se puede utilizar el pipe async en la vista para obtener de manera rapida su valor, tambien se puede aplicar a las promesas
   public coords$ : Promise<Coords>;
+  public permission$ : Promise<string>;
 
-  constructor() { }
+  constructor() {
+    this.permission$ = (navigator as any).permissions.query({name: 'geolocation'})
+                          .then(permission => permission.state);
+  }
 
   // metodo q se manda a llamar desde los componentes, cuando ellos requieran obtner la ubicacion
   // al llamar requestGeolocation se va asignar la promesa resultado de llamar a getGeolocation a la promesa coords$ (prop del servicio)
