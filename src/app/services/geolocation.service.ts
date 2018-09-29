@@ -39,8 +39,10 @@ export class GeolocationService {
     if(!this.coordsPromise){
       this.coordsPromise = this.getGeolocation();
     }
-
+    // una vez q la promesa fue resuelta, cualquiera q se vuelva a suscribir despues va recibir los datos q ya antes se habian resuelto, no se tiene q volver a ejecutar la promesa
+    // cada vez q manden a llamar requestGeolocation() y pidan el valor de la promesa, se va a mandar el q ya se habia resuelto antes, sin importar la cantidad de veces q se manden a llamar a requestGeolocation()
     this.coordsPromise.then(coords => {
+      // una vez resuelta se envia al flujo del observable
       this.coordsSubject.next(coords);
     })
   }
