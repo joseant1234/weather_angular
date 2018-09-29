@@ -8,6 +8,8 @@ import { Weather } from '../../structures/weather.structure';
 import { environment } from '../../environments/environment';
 import { Coords } from '../../structures/coords.structure';
 
+import { GeolocationService } from './geolocation.service';
+
 // en angular 6 los servicios ya no se declaran en app.module, sino en el mismo servicio
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,7 @@ export class CurrentWeatherService {
 
   // inyectar el servicio HttpClient usando el inyector de dependencia
   // si se especifica un argumento para el servicio que se esta realizando que coincida con alguno que tiene registrado el inyector de dependencia, como es el caso de HttpClient lo va asignar ese objeto
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient, private geolocationService : GeolocationService) {
     // el uso del operador pipe es para pasar como argumento las operaciones
     // lo q hace es q cuando halla nuevos datos en el observable, se van a pasar por la funcion map, map lo va recibir como argumento de la funcion q se le pasa
     // lo q return map van a sustituir los datos q map recibió
@@ -45,9 +47,12 @@ export class CurrentWeatherService {
 
     // se llama get, pues se esta trabajando con el flujo Subject, q se va llamar en el componente
     // this.weatherService
-    this.get({
-      lat: 35,
-      lon: 139
+    // this.get({
+    //   lat: 35,
+    //   lon: 139
+    // });
+    this.geolocationService.coords$.subscribe((coords)=>{
+      this.get(coords);
     });
   }
 
@@ -70,9 +75,9 @@ export class CurrentWeatherService {
 
     let args : string = `?lat=${coords.lat}&lon=${coords.lon}&APPID=${environment.key}&units=metric`;
     let url = this.endpoint + args
-    if(isDevMode()){
-      url = 'assets/weather.json'
-    }
+    // if(isDevMode()){
+    //   url = 'assets/weather.json'
+    // }
     this.http.get(url).subscribe(this.weatherSubject);
 
   }
