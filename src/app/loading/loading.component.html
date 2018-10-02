@@ -1,4 +1,4 @@
 <!-- elements.length es el condicionador para ver cuando debe de ejecutar la animacion -->
-<div [@loading]="elements.length">
+<div [@loading]="elements.length" *ngIf="!(currentWeatherService.weather$ | async)">
   <div *ngFor="let color of elements" class="circle" [ngStyle]="{'background-color': color}"></div>
 </div>
